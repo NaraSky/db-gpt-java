@@ -15,7 +15,11 @@
     <description>常量定义模块</description>
 
     <dependencies>
-        <!-- 仅依赖最小依赖 -->
+        <!-- SLF4J -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

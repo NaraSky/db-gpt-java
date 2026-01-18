@@ -15,6 +15,16 @@
     <description>通用工具类模块</description>
 
     <dependencies>
+        <!-- 内部依赖 -->
+        <dependency>
+            <groupId>com.dbgpt</groupId>
+            <artifactId>db-gpt-common-constant</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.dbgpt</groupId>
+            <artifactId>db-gpt-common-model</artifactId>
+        </dependency>
+
         <!-- Hutool -->
         <dependency>
             <groupId>cn.hutool</groupId>
