@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.dbgpt</groupId>
+    <artifactId>db-gpt-java</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>DB-GPT Java</name>
+    <description>AI-Native Data App Development Framework - Java Implementation</description>
+
+    <modules>
+        <module>db-gpt-common</module>
+        <module>db-gpt-application</module>
+        <module>db-gpt-api</module>
+        <module>db-gpt-adapter</module>
+        <module>db-gpt-core</module>
+        <module>db-gpt-service</module>
+        <module>db-gpt-starters</module>
+        <module>db-gpt-workflow</module>
+    </modules>
+
+    <properties>
+        <java.version>21</java.version>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Spring Boot -->
+        <spring-boot.version>3.2.3</spring-boot.version>
+
+        <!-- Spring AI -->
+        <spring-ai.version>1.0.0-M6</spring-ai.version>
+
+        <!-- AgentScope Java -->
+        <agentscope.version>1.0.6</agentscope.version>
+
+        <!-- Reactor (Async/Rx) -->
+        <reactor.version>2023.0.5</reactor.version>
+
+        <!-- Database -->
+        <postgresql.version>42.7.3</postgresql.version>
+        <mysql.version>8.3.0</mysql.version>
+        <mybatis-plus.version>3.5.6</mybatis-plus.version>
+        <druid.version>1.2.21</druid.version>
+
+        <!-- Vector Database -->
+        <milvus-sdk.version>2.4.8</milvus-sdk.version>
+        <pgvector.version>0.1.4</pgvector.version>
+        <weaviate.version>4.5.0</weaviate.version>
+        <qdrant.version>1.10.0</qdrant.version>
+
+        <!-- Neo4j -->
+        <neo4j-driver.version>5.20.0</neo4j-driver.version>
+
+        <!-- Elasticsearch -->
+        <elasticsearch.version>8.13.0</elasticsearch.version>
+
+        <!-- Redis -->
+        <jedis.version>5.1.0</jedis.version>
+
+        <!-- Additional Databases -->
+        <clickhouse.version>0.5.0</clickhouse.version>
+        <hive-jdbc.version>3.1.3</hive-jdbc.version>
+        <oracle-jdbc.version>21.11.0.0</oracle-jdbc.version>
+        <mssql-jdbc.version>12.4.2.jre11</mssql-jdbc.version>
+
+        <!-- DAG Workflow (for AWEL replacement) -->
+        <jgrapht.version>1.5.2</jgrapht.version>
+
+        <!-- Document Processing -->
+        <pdfbox.version>3.0.2</pdfbox.version>
+        <poi.version>5.2.5</poi.version>
+        <tika.version>2.9.2</tika.version>
+        <lucene.version>9.11.1</lucene.version>
+
+        <!-- JWT -->
+        <jjwt.version>0.12.5</jjwt.version>
+
+        <!-- Chart Visualization -->
+        <xchart.version>3.8.8</xchart.version>
+
+        <!-- SQL Parser -->
+        <jsqlparser.version>4.8</jsqlparser.version>
+
+        <!-- Elasticsearch REST Client (for keyword search) -->
+        <elasticsearch-rest.version>7.17.15</elasticsearch-rest.version>
+
+        <!-- HTTP Client -->
+        <okhttp.version>4.12.0</okhttp.version>
+
+        <!-- JSON -->
+        <fastjson2.version>2.0.48</fastjson2.version>
+
+        <!-- Utilities -->
+        <hutool.version>5.8.26</hutool.version>
+        <commons-lang3.version>3.14.0</commons-lang3.version>
+        <mapstruct.version>1.6.0</mapstruct.version>
+
+        <!-- API Documentation -->
+        <springdoc.version>2.3.0</springdoc.version>
+
+        <!-- Testing -->
+        <testcontainers.version>1.19.8</testcontainers.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Spring Boot BOM -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Spring AI BOM -->
+            <dependency>
+                <groupId>org.springframework.ai</groupId>
+                <artifactId>spring-ai-bom</artifactId>
+                <version>${spring-ai.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- 内部模块 -->
+            <dependency>
+                <groupId>com.dbgpt</groupId>
+                <artifactId>db-gpt-common-util</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dbgpt</groupId>
+                <artifactId>db-gpt-common-model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dbgpt</groupId>
+                <artifactId>db-gpt-common-constant</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dbgpt</groupId>
+                <artifactId>db-gpt-core-agent</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dbgpt</groupId>
+                <artifactId>db-gpt-core-llm</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dbgpt</groupId>
+                <artifactId>db-gpt-core-rag</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dbgpt</groupId>
+                <artifactId>db-gpt-core-memory</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dbgpt</groupId>
+                <artifactId>db-gpt-workflow-engine</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dbgpt</groupId>
+                <artifactId>db-gpt-adapter-llm</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dbgpt</groupId>
+                <artifactId>db-gpt-adapter-vector</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dbgpt</groupId>
+                <artifactId>db-gpt-adapter-database</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- Reactor BOM (Reactive Programming) -->
+            <dependency>
+                <groupId>io.projectreactor</groupId>
+                <artifactId>reactor-bom</artifactId>
+                <version>${reactor.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- AgentScope Java -->
+            <dependency>
+                <groupId>io.agentscope</groupId>
+                <artifactId>agentscope</artifactId>
+                <version>${agentscope.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.agentscope</groupId>
+                <artifactId>agentscope-spring-boot-starter</artifactId>
+                <version>${agentscope.version}</version>
+            </dependency>
+
+            <!-- Database -->
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgresql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mysql</groupId>
+                <artifactId>mysql-connector-j</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-3-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+
+            <!-- Neo4j -->
+            <dependency>
+                <groupId>org.neo4j.driver</groupId>
+                <artifactId>neo4j-java-driver</artifactId>
+                <version>${neo4j-driver.version}</version>
+            </dependency>
+
+            <!-- Additional Databases -->
+            <dependency>
+                <groupId>com.clickhouse</groupId>
+                <artifactId>clickhouse-jdbc</artifactId>
+                <version>${clickhouse.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.hive</groupId>
+                <artifactId>hive-jdbc</artifactId>
+                <version>${hive-jdbc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.oracle.database.jdbc</groupId>
+                <artifactId>ojdbc11</artifactId>
+                <version>${oracle-jdbc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.microsoft.sqlserver</groupId>
+                <artifactId>mssql-jdbc</artifactId>
+                <version>${mssql-jdbc.version}</version>
+            </dependency>
+
+            <!-- Vector Database Clients -->
+            <dependency>
+                <groupId>io.milvus</groupId>
+                <artifactId>milvus-sdk-java</artifactId>
+                <version>${milvus-sdk.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.pgvector</groupId>
+                <artifactId>pgvector</artifactId>
+                <version>${pgvector.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.weaviate</groupId>
+                <artifactId>client</artifactId>
+                <version>${weaviate.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.qdrant</groupId>
+                <artifactId>client</artifactId>
+                <version>${qdrant.version}</version>
+            </dependency>
+
+            <!-- DAG Workflow (JGraphT) -->
+            <dependency>
+                <groupId>org.jgrapht</groupId>
+                <artifactId>jgrapht-core</artifactId>
+                <version>${jgrapht.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jgrapht</groupId>
+                <artifactId>jgrapht-ext</artifactId>
+                <version>${jgrapht.version}</version>
+            </dependency>
+
+            <!-- Document Processing -->
+            <dependency>
+                <groupId>org.apache.pdfbox</groupId>
+                <artifactId>pdfbox</artifactId>
+                <version>${pdfbox.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tika</groupId>
+                <artifactId>tika-core</artifactId>
+                <version>${tika.version}</version>
+            </dependency>
+
+            <!-- Redis -->
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis.version}</version>
+            </dependency>
+
+            <!-- HTTP Client -->
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${okhttp.version}</version>
+            </dependency>
+
+            <!-- JSON -->
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson2.version}</version>
+            </dependency>
+
+            <!-- JWT -->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-api</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-impl</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-jackson</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+
+            <!-- Text Processing (Lucene) -->
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-core</artifactId>
+                <version>${lucene.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-analysis-common</artifactId>
+                <version>${lucene.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-queryparser</artifactId>
+                <version>${lucene.version}</version>
+            </dependency>
+
+            <!-- Chart Visualization -->
+            <dependency>
+                <groupId>org.knowm.xchart</groupId>
+                <artifactId>xchart</artifactId>
+                <version>${xchart.version}</version>
+            </dependency>
+
+            <!-- SQL Parser -->
+            <dependency>
+                <groupId>com.github.jsqlparser</groupId>
+                <artifactId>jsqlparser</artifactId>
+                <version>${jsqlparser.version}</version>
+            </dependency>
+
+            <!-- Utilities -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${mapstruct.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <!-- Apache Commons Codec -->
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>1.15</version>
+            </dependency>
+
+            <!-- API Documentation -->
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>${springdoc.version}</version>
+            </dependency>
+
+            <!-- Testcontainers -->
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>testcontainers-bom</artifactId>
+                <version>${testcontainers.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Elasticsearch REST Client (for keyword search in RAG) -->
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>elasticsearch-rest-high-level-client</artifactId>
+                <version>${elasticsearch-rest.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <repositories>
+        <repository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <name>Central Portal Snapshots</name>
+            <id>central-portal-snapshots</id>
+            <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                    <configuration>
+                        <excludes>
+                            <exclude>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                            </exclude>
+                        </excludes>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.13.0</version>
+                    <configuration>
+                        <source>21</source>
+                        <target>21</target>
+                        <encoding>UTF-8</encoding>
+                        <annotationProcessorPaths>
+                            <path>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                                <version>1.18.30</version>
+                            </path>
+                            <path>
+                                <groupId>org.mapstruct</groupId>
+                                <artifactId>mapstruct-processor</artifactId>
+                                <version>${mapstruct.version}</version>
+                            </path>
+                        </annotationProcessorPaths>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>
